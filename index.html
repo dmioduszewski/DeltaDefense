@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Delta Defense Dev Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Roboto import from Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- end of font import -->
+
+<!-- start of css styling-->
+<style type="text/css">
+/* overall page css */
+body {margin:0;padding:0;font-family:'Roboto', sans-serif;background-color:#fff;}
+
+/* css for header */
+header {position:fixed;display:block;width:100%;z-index:1000;top:0;}
+header .logos {background-color:#121212;color:#fff;padding:25px 200px;}
+header .logo_wrapper {display:flex;justify-content:space-between;align-items:center;}
+header .logo_wrapper>div {position:relative;}
+header .logo_wrapper span {font-size:10px;line-height:10px;position:absolute;left:-60px;bottom:0;font-style:italic;}
+/* white block with phone number */
+header .help {background-color:#fff;padding:5px 200px;}
+header .help p {margin:0;font-size:18px;text-align:right;line-height:18px;color:#666;font-weight:600;}
+header .help p em {margin-right: 10px;}
+header .help p a {text-decoration:none;color:#333;font-weight:700;}
+/* end header css */
+
+/* css for main section */
+#main {display:block;width:100%;position:relative;margin:135px 0 0;text-align:center;}
+/* css of main dark section with graphics */
+#main .top {background-color:#121212;display:flex;justify-content:center;padding:175px 0 135px;z-index:5;}
+#main .top>div {display:block;padding:0 50px;}
+#main .number {margin:10px 0 70px;display:flex;align-items:center;}
+#main .number span {font-size:42px;line-height:80px;width:80px;font-weight:bold;color:#fff;background-color:#0074E0;font-family:Roboto, sans-serif;border-radius:50%;display:block;text-align:center;}
+#main .number::after {content: "";display:block;max-width:300px;height:2px;background-color:#444546;width:100%;}
+
+/* css of main section with boxes */
+#main .boxes_container {z-index:10;position:relative;}
+#main #boxes {display:flex;flex-direction:column;align-items:center;padding:0 10px;}
+#main #boxes h3 {font-size:20px;margin:0 0 10px;font-weight:bold;}
+#main #boxes p {font-size:20px;margin:0;}
+#main #boxes .boxes_wrapper {background-color:#f7f7f8;width:600px;padding:35px 30px 35px 35px;text-align:left;margin:-30px 0 10px;color:#121212;border-radius:5px;position:relative;}
+#main #boxes .boxes_wrapper:nth-child(n+1) {margin-top:-75px;}
+/* re-sort the boxes to specific order and side */
+#main #boxes .boxes_wrapper.b1 {order:1;align-self:flex-end;}
+#main #boxes .boxes_wrapper.b2 {order:2;align-self:flex-start;}
+#main #boxes .boxes_wrapper.b3 {order:3;align-self:flex-end;}
+#main #boxes .boxes_wrapper.b4 {order:4;align-self:flex-start;}
+#main #boxes .boxes_wrapper.b5 {order:5;align-self:flex-end;}
+
+/* to add dashed lines for desktop */
+@media screen and (min-width: 1300px) {
+	#main .boxes_container {max-width:1300px;margin:0 auto;}
+	/* dashed vertical line for center */
+	#main .boxes_container::before {position:absolute;z-index:20;content:"";top:100px;left:50%;margin:-75px 0 0;height:80%;width:5px;border-right:3px dashed #b88e33;}
+
+	/* lines and dots for left boxes */
+	#main #boxes .boxes_wrapper.b1::before,
+	#main #boxes .boxes_wrapper.b3::before,
+	#main #boxes .boxes_wrapper.b5::before {position:absolute;z-index:25;top:50%;left:-35px;content: "";width:20px;height:5px;border-top:3px dashed #b88e33;}
+	#main #boxes .boxes_wrapper.b1::after,
+	#main #boxes .boxes_wrapper.b3::after,
+	#main #boxes .boxes_wrapper.b5::after {position:absolute;z-index:20;content:"•";left:-20px;top:calc(50% - 22px);font-size:40px;color:#b88e33;height:20px;line-height:40px;}
+
+	/* lines and dots for right boxes */
+	#main #boxes .boxes_wrapper.b2::before,
+	#main #boxes .boxes_wrapper.b4::before {position:absolute;z-index:25;top:50%;right:-40px;content: "";width:25px;height:5px;border-top:3px dashed #b88e33;}
+	#main #boxes .boxes_wrapper.b2::after,
+	#main #boxes .boxes_wrapper.b4::after {position:absolute;z-index:20;content:"•";right:-20px;top:calc(50% - 22px);font-size:40px;color:#b88e33;height:20px;line-height:40px;}
+}
+/* end desktop only media query */
+
+/* footer css */
+footer {display:block;width:100%;height:100px;}
+
+/* media query block for mobile styling
+   Set to 1299 to stack boxes */
+@media screen and (max-width: 1299px) {
+	/* makes images responsive */
+	.fullimg {width:100%;height:auto;}
+	/* hides topmost header block */
+	header {display:none;}
+	/* sets the main section to the top */
+	#main {margin:0;}
+	/* main dark section  */
+	#main .top {padding:20px 20px 50px;}
+	#main .top>div {padding:0 10px;}
+	#main .number {margin-bottom:20px;}
+	#main .number span {font-size:20px;line-height:50px;width:50px;}
+	/* main section with boxes */
+	#main #boxes {margin-top:-30px;}
+	#main #boxes .boxes_wrapper {width:90%;margin:0 0 20px;order:1 !important;}
+	#main #boxes p {font-size:16px;}
+	#main #boxes .boxes_wrapper:nth-child(n+1) {margin-top:0;align-self:flex-end;}
+	
+	/* to get dashed lines */
+	#main .boxes_container::before {position:absolute;z-index:20;content:"";top:100px;left:5%;margin:-25px 0 0;height:80%;width:5px;border-right:3px dashed #b88e33;}
+	#main #boxes .boxes_wrapper::before {position:absolute;z-index:20;content:"";left:-50px;top:50%;width:40px;height:3px;border-top:3px dashed #b88e33;}
+	#main #boxes .boxes_wrapper::after {position:absolute;z-index:20;content:"•";left:-15px;top:calc(50% - 20px);font-size:40px;color:#b88e33;height:20px;line-height:40px;}
+}
+
+/* media queries for dashed lines on smaller screens */
+@media screen and (max-width: 775px) {
+	#main .boxes_container::before {left:10px;}
+	#main #boxes .boxes_wrapper::before {left:-65px;width:5%;}
+	#main #boxes .boxes_wrapper::after {left:-33px;}
+}
+@media screen and (max-width: 600px) {
+	#main .boxes_container::before {left:3px;height:80%;top:115px;}
+	#main #boxes .boxes_wrapper {margin-bottom:10px;}
+	#main #boxes .boxes_wrapper::before {left:-50px;width:20px;}
+	#main #boxes .boxes_wrapper::after {left:-30px;}
+}
+@media screen and (max-width: 450px) {
+	#main .boxes_container::before {top:110px;}
+	#main #boxes .boxes_wrapper::before {left:-40px;width:10px;}
+}
+/* end media query blocks */
+</style>
+
+<!-- bootstrap css import -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+<header>
+	<div class="logos">
+		<!-- block with USCCA logo and Delta Defense logo -->
+		<div class="logo_wrapper">
+			<div><img src="images/uscca-logo.svg" height="60" alt="USCCA logo" /></div>
+			<div><span>Presented by</span><img src="images/Delta_logo.svg" height="35" alt="Delta Defense LLC logo" /></div>
+		</div>
+		<!-- end logo block -->
+	</div>
+	<!-- block with phone number -->
+	<div class="help">
+		<p><em>Here to Help 24/7:</em> <a href="tel:18006749779" target="_blank" style="color:#333;text-decoration:none;">800-674-9779</a></p>
+	</div>
+	<!-- end phone block -->
+</header>
+
+<!-- center section -->
+<div id="main">
+	<!-- top dark section with graphics -->
+	<div class="top">
+		<div><img src="images/group_icons.svg" height="240" class="fullimg" alt="connecting the community graphic" /></div>
+		<div>
+			<div class="number"><span>4</span></div>
+			<div><img src="images/Community.svg" height="75" class="fullimg" alt="USCCA Community and Connection" /></div>
+		</div>
+	</div>
+	<!-- end dark section -->
+
+	<!-- main section with gray boxes -->
+	<div class="boxes_container">
+		<div id="boxes">
+			<div class="boxes_wrapper b2">
+				<h3>Online Community</h3>
+				<p>Join fun, gun-friendly conversations with more than 80,000 like-minded Americans on our own ad-free social media platform.</p>
+			</div>
+			<div class="boxes_wrapper b1">
+				<h3>Expert Customer Engagement Team</h3>
+				<p>100% American-based, the Delta Defense Team are expertly trained on all USCCA products and will help you with any questions you may have.</p>
+			</div>
+			<div class="boxes_wrapper b3">
+				<h3>Free Entry to Annual USCCA Expo</h3>
+				<p>USCCA Members get FREE entry to the annual USCCA Concealed Carry &amp; Home Defense Expo {Headed to Fort Worth, TX in November 2022}</p>
+			</div>
+			<div class="boxes_wrapper b4">
+				<h3>24/7 Critical Response Team Emergency Support</h3>
+				<p>After a self-defense incident, your first call should be to 9-1-1, and your second call will be to this emergency support team who will be your guide through the unanticipated fog of a self-defense incident.</p>
+			</div>
+			<div class="boxes_wrapper b5">
+				<h3>Nationwide Attorney Network</h3>
+				<p>When choosing your criminal defense attorny, you may select a name you already trust  or you can handpick one from our growing, nationwide network of more than 1,200 attorneys.</p>
+			</div>
+		</div>
+	</div>
+	<!-- end gray box section -->
+</div>
+<!-- end center area -->
+
+<!-- footer section -->
+<footer>
+	&nbsp;
+</footer>
+<!-- end footer section -->
+
+<!-- bootstrap js import -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</htmml>
